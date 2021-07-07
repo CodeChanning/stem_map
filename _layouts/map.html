@@ -11,7 +11,7 @@
 </head>
 <body>
     <h1>MAP</h1>
-    <div id = "sample" style = "width:900px; height:580px;"></div>
+    <div id = "map" style = "width:900px; height:580px;"></div>
     <script>
         //creating MAP OPTIONS
         var mapOptions = {
@@ -20,7 +20,7 @@
         }    
         
         //creating MAP OBJECT
-        var map = new L.map('sample', mapOptions);
+        var map = new L.map('map', mapOptions);
 
         //creating LAYER OBJECT
         var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'); //takes layer from open street map
