@@ -7,10 +7,20 @@
     <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
     <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
     <script>
+        //creating MAP OPTIONS
         var mapOptions = {
             center: [17.385044, 78.486671],
             zoom: 10
         }    
+        
+        //creating MAP OBJECT
+        var map = new L.map('sample', mapOptions);
+
+        //creating LAYER OBJECT
+        var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'); //takes layer from open street map
+
+        //adds layer to map
+        map.addLayer(layer);
     </script>
     <title>Document</title>
 </head>
