@@ -1,5 +1,5 @@
 ---
-layout: testpage
+layout: map
 title: About
 permalink: /about/
 ---
