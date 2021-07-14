@@ -1,5 +1,5 @@
 ---
-layout: leafletmap_template
+layout: testpage
 title: About
 permalink: /about/
 ---
