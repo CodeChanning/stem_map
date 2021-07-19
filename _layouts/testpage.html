@@ -65,16 +65,17 @@
 
       // Use PapaParse to transform file into arrays
       var data = Papa.parse(csvString.trim()).data.filter(
-        function(row) { return row.length === 2 }
+        function(row) { return row.length === 3 }
       ).map(function(a) {
-        return [ parseFloat(a[0]), parseFloat(a[1]) ]
+        return [ parseFloat(a[0]), parseFloat(a[1]), parseFloat(a[2]) ]
       })
 
       // Add all points into a heat layer
       var heat = L.heatLayer(data, {
         max: 1.0,
-        radius: 30,
-        blur: 1,
+        radius: 100,
+        blur: 7,
+        gradient: {0.0: 'red',0.3: 'purple', 0.6:'blue'}
       })
 
       // Add the heatlayer to the map
