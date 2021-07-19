@@ -69,18 +69,52 @@
       ).map(function(a) {
         return [ parseFloat(a[0]), parseFloat(a[1]), parseFloat(a[2]) ]
       })
+      
+    var dotIcon = L.icon({
+      iconUrl: 'dot.png',
+      iconSize: [2, 2]
+    });
+
+      console.log(data[0][0]);
+      for(var i = 0;  i < data.length; i++){
+        var latlng = new L.LatLng(data[i][0], data[i][1]);
+        
+        var marker = L.marker(latlng, {icon: dotIcon}).addTo(map);
+        marker.bindPopup("shadow clone jutsu"/*data[i][2]*/).openPopup();
+      }
+      
 
       // Add all points into a heat layer
       var heat = L.heatLayer(data, {
         max: 1.0,
-        radius: 100,
-        blur: 7,
+        radius: 150,
+        blur: 1,
         gradient: {0.0: 'red',0.3: 'purple', 0.6:'blue'}
       })
 
       // Add the heatlayer to the map
       heat.addTo(map)
     })
+    //Popup that displays data about a city thats clicked on
+    var har = new L.LatLng(46.435512,	-109.8343499);
+    /*
+    var popup = L.popup({lat: 46.435512, lon: -109.8343499})
+    .setLatLng()
+    .setContent('<p>Hello world!<br />This is a nice popup.</p>')
+    .openOn(map);
+    
+    console.log(popup.getLatLng());*/
+    map.on('click', function(e) {        
+        var popLocation= e.latlng;
+        var popup = L.popup()
+        .setLatLng(popLocation)
+        .setContent("does this work?")
+        .openOn(map);        
+    });
+
+    //binding popup to marker
+    /*var marker = L.marker(har).addTo(map);
+    marker.bindPopup("hello??").openPopup();*/
 
     // Add custom attribution
     L.control.attribution({
