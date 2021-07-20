@@ -61,13 +61,16 @@
     }).addTo(map)
 
     // Read data from CSV file
-    $.get('./data.csv', function(csvString) {
+    $.get('./opp_atlas_collegegraduationrate_data.csv', function(csvString) {
 
       // Use PapaParse to transform file into arrays
+     
       var data = Papa.parse(csvString.trim()).data.filter(
-        function(row) { return row.length === 3 }
+        function(row) { return row.length === 5 }
       ).map(function(a) {
-        return [ parseFloat(a[0]), parseFloat(a[1]), parseFloat(a[2]) ]
+        console.log(" hello " + parseFloat(a[2]) + " ");
+         
+        return [parseFloat(a[2]), parseFloat(a[3]), parseFloat(a[4])]
       })
       
       //adding icon for marker
@@ -77,8 +80,8 @@
       });
 
       //adding markers for every city that display the grad rate for that place
-      console.log(data[0][0]);
-      for(var i = 0;  i < data.length; i++){
+      console.log(data[1]);
+      for(var i = 1;  i < data.length; i++){
         var latlng = new L.LatLng(data[i][0], data[i][1]);
         
         var marker = L.marker(latlng, {icon: dotIcon}).addTo(map);
