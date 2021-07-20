@@ -70,26 +70,28 @@
         return [ parseFloat(a[0]), parseFloat(a[1]), parseFloat(a[2]) ]
       })
       
-    var dotIcon = L.icon({
-      iconUrl: 'dot.png',
-      iconSize: [2, 2]
-    });
+      //adding icon for marker
+      var dotIcon = L.icon({
+        iconUrl: 'dot.png',
+        iconSize: [10, 10]
+      });
 
+      //adding markers for every city that display the grad rate for that place
       console.log(data[0][0]);
       for(var i = 0;  i < data.length; i++){
         var latlng = new L.LatLng(data[i][0], data[i][1]);
         
         var marker = L.marker(latlng, {icon: dotIcon}).addTo(map);
-        marker.bindPopup("shadow clone jutsu"/*data[i][2]*/).openPopup();
-      }
+        marker.bindPopup("College Graduation Rate: " + data[i][2] + "");
+      } 
       
 
       // Add all points into a heat layer
       var heat = L.heatLayer(data, {
-        max: 1.0,
-        radius: 150,
-        blur: 1,
-        gradient: {0.0: 'red',0.3: 'purple', 0.6:'blue'}
+        max: 0.6,
+        radius: 40,
+        blur: 3,
+        //gradient: {0.0: 'red',0.3: 'orange', 0.6:'yellow'}
       })
 
       // Add the heatlayer to the map
