@@ -61,7 +61,7 @@
     }).addTo(map)
 
     // Read data from CSV file
-    $.get('https://github.com/CodeChanning/stem_map/blob/c562e038b401108b679c1845123d504191db38ce/_layouts/opp_atlas_collegegraduationrate_data.csv'/*'stem_map/_layouts/opp_atlas_collegegraduationrate_data.csv'*/, function(csvString) {
+    $.get('opp_atlas_collegegraduationrate_data.csv', function(csvString) {
 
       // Use PapaParse to transform file into arrays
      
@@ -71,6 +71,7 @@
         console.log(" hello " + parseFloat(a[2]) + " ");
          
         return [parseFloat(a[2]), parseFloat(a[3]), parseFloat(a[4])]
+        
       })
       
       //adding icon for marker
@@ -80,21 +81,22 @@
       });
 
       //adding markers for every city that display the grad rate for that place
-      console.log(data[1]);
-      for(var i = 1;  i < data.length; i++){
+      console.log(data[0]);
+      for(var i = 0;  i < data.length; i++){
         var latlng = new L.LatLng(data[i][0], data[i][1]);
-        
+        console.log(i, data[i]);
+
         var marker = L.marker(latlng, {icon: dotIcon}).addTo(map);
         marker.bindPopup("College Graduation Rate: " + data[i][2] + "");
       } 
-      
+      console.log(data[0]);
 
       // Add all points into a heat layer
       var heat = L.heatLayer(data, {
         max: 0.6,
         radius: 40,
         blur: 3,
-        //gradient: {0.0: 'red',0.3: 'orange', 0.6:'yellow'}
+        gradient: {0.0: 'red',0.3: 'purple', 0.6:'blue'}
       })
 
       // Add the heatlayer to the map
