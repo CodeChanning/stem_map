@@ -97,22 +97,23 @@
       // Add the heatlayer to the map
       heat.addTo(map)
     })
-    //Popup that displays data about a city thats clicked on
-    var har = new L.LatLng(46.435512,	-109.8343499);
-    /*
+    
+    //Displays popup wherever the user clicks
+    /*var har = new L.LatLng(46.435512,	-109.8343499);
+    
     var popup = L.popup({lat: 46.435512, lon: -109.8343499})
     .setLatLng()
     .setContent('<p>Hello world!<br />This is a nice popup.</p>')
     .openOn(map);
     
-    console.log(popup.getLatLng());*/
+    console.log(popup.getLatLng());
     map.on('click', function(e) {        
         var popLocation= e.latlng;
         var popup = L.popup()
         .setLatLng(popLocation)
         .setContent("does this work?")
         .openOn(map);        
-    });
+    });*/
 
     //binding popup to marker
     /*var marker = L.marker(har).addTo(map);
