@@ -100,14 +100,14 @@
         max: max,
         radius: 20,
         blur: 3,
-        gradient: {1.0:'yellow'}
+        gradient: {1.0:'blue'}
       })
 
       // Add the heatlayer to the map
       heat.addTo(map)
     })
     
-    //Displays popup wherever the user clicks
+    /*Displays popup wherever the user clicks
     console.log(popup.getLatLng());
     map.on('click', function(e) {        
         var popLocation= e.latlng;
@@ -117,7 +117,7 @@
         .setLatLng(popLocation)
         .setContent("does this work?")
         .openOn(map);        
-    });
+    });*/
 
     // Add custom attribution
     L.control.attribution({
