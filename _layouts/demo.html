@@ -21,20 +21,9 @@
 <body class="helvetica">
 
   <div id="map" class="vh-100 vw-100 bg-near-white"></div>
-  
-  <!-- Summary or title box
-  <div id="legend" class="bg-white fixed top-0 left-0 pa2 mt2 mb2 ml2 br1 o-90" style="z-index: 1000; width: 380px">
-    <h1 class="f3 mt0">Bicycle Theft in London oi govnah</h1> 
-
-    <p class="measure mb1">
-      This heatmap shows hotspots of bicycle theft in London
-      in January–July 2020 according to the Metropolitan Police data.
-    </p>
-
-  </div>
-  -->
 
   <script>
+      var latlng;
 
     //Making base map
     var map = L.map('map', {
@@ -48,6 +37,7 @@
 
     // Add zoom in/out buttons to the top-right
     L.control.zoom({position: 'topright'}).addTo(map)
+
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	    maxZoom: 19,
@@ -66,7 +56,7 @@
     // Read data from CSV file
     $.get('https://raw.githubusercontent.com/CodeChanning/travel_safety_data/main/demo_data.csv', function(csvString) {
 
-      // Use PapaParse to transform file into arrays
+      // Use PapaParse to transform linked csv file into array that can be used with Leaflet
       var data = Papa.parse(csvString.trim()).data.filter(
         function(row) { return row.length === 3 }
       ).map(function(a) {
@@ -76,13 +66,14 @@
         
       })
       
-      //adding icon for marker
+      
+      //Adding icon for marker so that the different areas are more visual for the user
       var dotIcon = L.icon({
         iconUrl: 'https://raw.githubusercontent.com/CodeChanning/stem_map/gh-pages/_layouts/dot.png',
         iconSize: [10, 10]
       });
 
-      //adding markers for every area that displays the density for that place
+      //Adding functionality so that when each area is clicked the people density of that area is displayed
       console.log(data[1]);
       for(var i = 0;  i < data.length; i++){
         var latlng = new L.LatLng(data[i][0], data[i][1]);
@@ -91,33 +82,34 @@
         var marker = L.marker(latlng, {icon: dotIcon}).addTo(map);
         marker.bindPopup("Area Density: " + data[i][2] + "");
       } 
-      console.log(data[0]);
       
-      var max = 1.1;
-      var mid = max / 2;
-      // Add all points into a heat layer
+      // Using leaflet extra to create data map using the array
       var heat = L.heatLayer(data, {
-        max: max,
-        radius: 20,
-        blur: 3,
-        gradient: {1.0:'blue'}
+        max: 1.0, //setting max density value
+        radius: 20, //setting radius for individual points
+        blur: 3, //setting blur for points
+        gradient: {0.0:'blue', 0.5: 'purple', 1.0: 'red'} //setting gradient color
       })
 
       // Add the heatlayer to the map
       heat.addTo(map)
+
+      latlng = data;
     })
     
-    /*Displays popup wherever the user clicks
-    console.log(popup.getLatLng());
+    //Displays popup wherever the user clicks
+    //console.log(popup.getLatLng());
     map.on('click', function(e) {        
         var popLocation= e.latlng;
 
-        console.log(map.getZoom())
+        //map.setView([28.453350169238917, -88.61886261397252]);
+
+        /*console.log(map.getZoom())
         var popup = L.popup()
         .setLatLng(popLocation)
         .setContent("does this work?")
-        .openOn(map);        
-    });*/
+        .openOn(map);*/        
+    });
 
     // Add custom attribution
     L.control.attribution({
@@ -125,8 +117,26 @@
         by <a href="https://handsondataviz.org" target="_blank">HandsOnDataViz</a>'
     }).addTo(map)
 
+    var link = document.getElementById('button1');
+    link.setAttribute('href', "#");
+    link.setAttribute('onclick', "alert('click')");
   </script>
 
+  
+  
+  <!-- Summary or title box-->
+  <div id="legend" class="bg-white fixed top-0 left-0 pa2 mt2 mb2 ml2 br1 o-90" style="z-index: 1000; width: wrap">
+    <h1 class="f3 mt0">People Density Map</h1> 
+    
+    
+    
+    <!-- 
+    <p class="measure mb1">
+      This heatmap shows hotspots of bicycle theft in London
+      in January–July 2020 according to the Metropolitan Police data.
+    </p> -->
+
+  </div>
 </body>
 
 </html>
