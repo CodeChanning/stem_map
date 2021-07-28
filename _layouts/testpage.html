@@ -22,22 +22,16 @@
 
   <div id="map" class="vh-100 vw-100 bg-near-white"></div>
 
-  <div id="legend" class="bg-white fixed top-0 left-0 pa2 mt2 ml2 br1 o-90" style="z-index: 999; width: 380px">
-    <h1 class="f3 mt0">Bicycle Theft in London</h1>
-
-    <p class="measure mb1">
-      This heatmap shows hotspots of bicycle theft in London
-      in January–July 2020 according to the Metropolitan Police data.
-    </p>
-
-  </div>
+  
 
   <script>
     /*** Data File String Reference Values ***/
     op_atlas_college_grad = 'https://raw.githubusercontent.com/CodeChanning/stem_map/gh-pages/_layouts/opp_atlas_collegegraduationrate_data.csv';
 
-    nsf_ppe_funding = 'https://raw.githubusercontent.com/CodeChanning/stem_map/gh-pages/stem_map_data/nsf_school_state_funding%20(1)%20-%20primary-08-1.csv';
+    nsf_school_funding = 'https://raw.githubusercontent.com/CodeChanning/stem_map/gh-pages/stem_map_data/nsf_school_state_funding%20(1)%20-%20primary-08-1%20(1).csv';
     
+    var heat;
+    var marker
 
     /*** MAP -- MAKING ***/
     
@@ -46,7 +40,7 @@
       zoomControl: false, // Add zoom control separately below
       center: [39.8333333, -100.585522], // Initial map center
       zoom: 4, // Initial zoom level
-      //maxZoom: 5,
+      //maxZoom: 20,
       attributionControl: false, // Instead of default attribution, we add custom at the bottom of script
       scrollWheelZoom: true
     })
@@ -69,15 +63,14 @@
       pane: 'shadowPane'  // always display on top
     }).addTo(map)
 
-    //adding icon for marker
+    adding icon for marker
     var dotIcon = L.icon({
         iconUrl: 'https://raw.githubusercontent.com/CodeChanning/stem_map/gh-pages/_layouts/dot.png',
         iconSize: [10, 10]
       });
 
     /*** MAKING HEAT MAPS WITH DATA ***/
-    csvProcessor(op_atlas_college_grad, "College Graduation Rate: ", 2, 3, 4);
-    csvProcessor(nsf_ppe_funding, "Funding per student: ", 1, 2, 8);
+    
 
     // Add custom attribution
     L.control.attribution({
@@ -85,41 +78,67 @@
         by <a href="https://handsondataviz.org" target="_blank">HandsOnDataViz</a>'
     }).addTo(map)
 
-    function csvProcessor(data, markerText, latIndex, lngIndex, intensityIndex){
+    function csvProcessor(data, markerText, latIndex, lngIndex, intensityIndex, length, equalizer){
       // Read data from CSV file
       $.get(data, 
       function(csvString) {
-
+      var count = 0;
       // Use PapaParse to transform file into arrays
       var data = Papa.parse(csvString.trim()).data.filter(
-      function(row) { return row.length === 5 }
+      function(row) { return row.length === length }
       ).map(function(a) {   
+        count++;
+        console.log(count)
+        
+        console.log(a[0], a[latIndex], a[lngIndex], a[intensityIndex])
       return [parseFloat(a[latIndex]), parseFloat(a[lngIndex]), parseFloat(a[intensityIndex])]
       })
+      
+      intensityVals = [];
 
-
-      //adding markers for every city that display the grad rate for that place
-      console.log(data[0]);
-      for(var i = 0;  i < data.length; i++){
-        var latlng = new L.LatLng(data[i][0], data[i][1]);
-        console.log(i, data[i]);
-
-        var marker = L.marker(latlng, {icon: dotIcon}).addTo(map);
-        marker.bindPopup(markerText + data[i][2] + "");
-      } 
-      console.log(data[0]);
-
-      // Add all points into a heat layer
-      var heat = L.heatLayer(data, {
-        max: 0.6,
-        radius: 12,
-        blur: 3,
-        maxZoom: 5,
-        //gradient: { 0.0: 'red', 1.0:'blue'}
+      data = data.filter(function(elem){
+        console.log(elem[0]);
+        console.log(Object.is(elem[0], NaN));
+        return !Object.is(elem[0], NaN);
       })
+      
+      //adding markers for every city that display the grad rate for that place
+      for(var i = 0;  i < data.length; i++){
+        console.log(i + 1)
+        console.log(data[i]);
+        if(Object.is(data[i][0], NaN) || Object.is(data[i][1], NaN) || Object.is(data[i][2], NaN)){
+          console.log("SKIP ");
+          console.log(data)
+          data.splice
+        }
+        var latlng = new L.LatLng(data[i][0], data[i][1]);
 
+        marker = L.marker(latlng ,{icon: dotIcon}).addTo(map);
+        marker.bindPopup(markerText + data[i][2] + "");
+        console.log (data[i] + " " + i);
+
+        data[i][2] = data[i][2] / 1000;
+        intensityVals.push(data[i][2]);
+      } 
+      
+     max = Math.max.apply(null, intensityVals);
+     console.log(intensityVals)
+     console.log();
+      // Add all points into a heat layer
+      //console.log(max)
+      heat = L.heatLayer(data, {
+        
+        max: max,
+        radius: 20,
+        blur: 3,
+        maxZoom: 1,
+        gradient: { 0.0: 'red', 1.0:'blue'}
+      })
+      
+      
       // Add the heatlayer to the map
       heat.addTo(map)
+      console.log("I'M HERE");
       })
     }
     
@@ -147,6 +166,21 @@
     }
   
   </script>
+
+<div id="legend" class="bg-white fixed top-0 left-0 pa2 mt2 ml2 br1 o-90" style="z-index: 999; width: 380px">
+    <h1 class="f3 mt0">Bicycle Theft in London</h1>
+    
+    <!--
+    <p class="measure mb1">
+      This heatmap shows hotspots of bicycle theft in London
+      in January–July 2020 according to the Metropolitan Police data.
+    </p> -->
+
+    <button onclick=' csvProcessor(op_atlas_college_grad, "College Graduation Rate: ", 2, 3, 4, 5, 1);
+    '>College Graduation Rate</button>
+    <button onClick='map.removeLayer(heat); marker.clearLayers(); console.log("lmao"); csvProcessor(nsf_school_funding, "State School Funding (In Millions): $", 1, 2, 8, 15, 1000);'>State School Funding</button>
+
+  </div>
 
 </body>
 
