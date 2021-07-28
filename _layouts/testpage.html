@@ -35,6 +35,8 @@
   <script>
     /*** Data File String Reference Values ***/
     op_atlas_college_grad = 'https://raw.githubusercontent.com/CodeChanning/stem_map/gh-pages/_layouts/opp_atlas_collegegraduationrate_data.csv';
+
+    nsf_ppe_funding = 'https://raw.githubusercontent.com/CodeChanning/stem_map/gh-pages/stem_map_data/nsf_school_state_funding%20(1)%20-%20primary-08-1.csv';
     
 
     /*** MAP -- MAKING ***/
@@ -75,6 +77,7 @@
 
     /*** MAKING HEAT MAPS WITH DATA ***/
     csvProcessor(op_atlas_college_grad, "College Graduation Rate: ", 2, 3, 4);
+    csvProcessor(nsf_ppe_funding, "Funding per student: ", 1, 2, 8);
 
     // Add custom attribution
     L.control.attribution({
