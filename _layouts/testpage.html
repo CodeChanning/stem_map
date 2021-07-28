@@ -36,6 +36,7 @@
     /*** Data File String Reference Values ***/
     op_atlas_college_grad = 'https://raw.githubusercontent.com/CodeChanning/stem_map/gh-pages/_layouts/opp_atlas_collegegraduationrate_data.csv';
     
+
     /*** MAP -- MAKING ***/
     
     //Making base map
@@ -73,7 +74,7 @@
       });
 
     /*** MAKING HEAT MAPS WITH DATA ***/
-    csvProcessor(op_atlas_college_grad, "College Graduation rate:");
+    csvProcessor(op_atlas_college_grad, "College Graduation Rate: ", 2, 3, 4);
 
     // Add custom attribution
     L.control.attribution({
@@ -81,7 +82,7 @@
         by <a href="https://handsondataviz.org" target="_blank">HandsOnDataViz</a>'
     }).addTo(map)
 
-    function csvProcessor(data, markerText){
+    function csvProcessor(data, markerText, latIndex, lngIndex, intensityIndex){
       // Read data from CSV file
       $.get(data, 
       function(csvString) {
@@ -90,7 +91,7 @@
       var data = Papa.parse(csvString.trim()).data.filter(
       function(row) { return row.length === 5 }
       ).map(function(a) {   
-      return [parseFloat(a[2]), parseFloat(a[3]), parseFloat(a[4])]
+      return [parseFloat(a[latIndex]), parseFloat(a[lngIndex]), parseFloat(a[intensityIndex])]
       })
 
 
@@ -108,10 +109,10 @@
       // Add all points into a heat layer
       var heat = L.heatLayer(data, {
         max: 0.6,
-        radius: 10,
+        radius: 12,
         blur: 3,
         maxZoom: 5,
-        gradient: { 0.0: 'red', 0.5: 'purple', 1.0:'blue'}
+        //gradient: { 0.0: 'red', 1.0:'blue'}
       })
 
       // Add the heatlayer to the map
