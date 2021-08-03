@@ -214,6 +214,17 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
+       "coordinates":  [ -99.9018131,41.4925374 ]
+    },
+    "properties": {
+    "State":"Nebraska",
+    "amountPerPupil":12491
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
        "coordinates":  [ -85.6023643,44.3148443 ]
     },
     "properties": {
