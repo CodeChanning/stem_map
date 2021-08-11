@@ -1,0 +1,202 @@
+[
+  {
+    "State": "New York",
+    "amountPerPupil": 24040
+  },
+  {
+    "State": "Connecticut",
+    "amountPerPupil": 20635
+  },
+  {
+    "State": "New Jersey",
+    "amountPerPupil": 20021
+  },
+  {
+    "State": "Alaska",
+    "amountPerPupil": 17726
+  },
+  {
+    "State": "Massachusetts",
+    "amountPerPupil": 17058
+  },
+  {
+    "State": "New Hampshire",
+    "amountPerPupil": 16893
+  },
+  {
+    "State": "Pennsylvania",
+    "amountPerPupil": 16395
+  },
+  {
+    "State": "Wyoming",
+    "amountPerPupil": 16224
+  },
+  {
+    "State": "Rhode Island",
+    "amountPerPupil": 16121
+  },
+  {
+    "State": "Illinois",
+    "amountPerPupil": 15741
+  },
+  {
+    "State": "Delaware",
+    "amountPerPupil": 15639
+  },
+  {
+    "State": "Hawaii",
+    "amountPerPupil": 15242
+  },
+  {
+    "State": "Maryland",
+    "amountPerPupil": 14762
+  },
+  {
+    "State": "Maine",
+    "amountPerPupil": 14145
+  },
+  {
+    "State": "North Dakota",
+    "amountPerPupil": 13758
+  },
+  {
+    "State": "Ohio",
+    "amountPerPupil": 13027
+  },
+  {
+    "State": "Washington",
+    "amountPerPupil": 12995
+  },
+  {
+    "State": "Minnesota",
+    "amountPerPupil": 12975
+  },
+  {
+    "State": "California",
+    "amountPerPupil": 12498
+  },
+  {
+    "State": "Nebraska",
+    "amountPerPupil": 12491
+  },
+  {
+    "State": "Michigan",
+    "amountPerPupil": 12345
+  },
+  {
+    "State": "Wisconsin",
+    "amountPerPupil": 12285
+  },
+  {
+    "State": "Virginia",
+    "amountPerPupil": 12216
+  },
+  {
+    "State": "Oregon",
+    "amountPerPupil": 11920
+  },
+  {
+    "State": "Iowa",
+    "amountPerPupil": 11732
+  },
+  {
+    "State": "Montana",
+    "amountPerPupil": 11680
+  },
+  {
+    "State": "Kansas",
+    "amountPerPupil": 11653
+  },
+  {
+    "State": "Louisiana",
+    "amountPerPupil": 11452
+  },
+  {
+    "State": "West Virginia",
+    "amountPerPupil": 11334
+  },
+  {
+    "State": "Kentucky",
+    "amountPerPupil": 11110
+  },
+  {
+    "State": "South Carolina",
+    "amountPerPupil": 10856
+  },
+  {
+    "State": "Missouri",
+    "amountPerPupil": 10810
+  },
+  {
+    "State": "Georgia",
+    "amountPerPupil": 10810
+  },
+  {
+    "State": "Indiana",
+    "amountPerPupil": 10262
+  },
+  {
+    "State": "Colorado",
+    "amountPerPupil": 10202
+  },
+  {
+    "State": "Arkansas",
+    "amountPerPupil": 10139
+  },
+  {
+    "State": "South Dakota",
+    "amountPerPupil": 10073
+  },
+  {
+    "State": "Alabama",
+    "amountPerPupil": 9696
+  },
+  {
+    "State": "Texas",
+    "amountPerPupil": 9606
+  },
+  {
+    "State": "New Mexico",
+    "amountPerPupil": 9582
+  },
+  {
+    "State": "Tennessee",
+    "amountPerPupil": 9544
+  },
+  {
+    "State": "Nevada",
+    "amountPerPupil": 9417
+  },
+  {
+    "State": "North Carolina",
+    "amountPerPupil": 9377
+  },
+  {
+    "State": "Florida",
+    "amountPerPupil": 9346
+  },
+  {
+    "State": "Vermont",
+    "amountPerPupil": 9340
+  },
+  {
+    "State": "Mississippi",
+    "amountPerPupil": 8935
+  },
+  {
+    "State": "Oklahoma",
+    "amountPerPupil": 8239
+  },
+  {
+    "State": "Arizona",
+    "amountPerPupil": 8239
+  },
+  {
+    "State": "Idaho",
+    "amountPerPupil": 7771
+  },
+  {
+    "State": "Utah",
+    "amountPerPupil": 7628
+  }
+]
